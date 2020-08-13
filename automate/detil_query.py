@@ -9,6 +9,7 @@ class DetilQueryPageObject(BasePageObject):
     get_wilayah_url = "https://kkp2.atrbpn.go.id/peta/Wilayah/GetWilayah"
     url_query = "https://kkp2.atrbpn.go.id/peta/DataSpasial/QueryByNIB"
     detil_info_url = "https://kkp2.atrbpn.go.id/peta/DataSpasial/DetilInfoFromPP"
+    validasi_bidang_url = "https://kkp2.atrbpn.go.id/peta/DataSpasial/ValidasiBidang"
 
     @set_response
     def init_page(self) -> requests.Response:
@@ -84,4 +85,11 @@ class DetilQueryPageObject(BasePageObject):
             "page": 1
         }
         resp = self._s.post(self.detil_info_url, data=data)
+        return resp.json()
+
+    def validate_bidang(self, pid: str):
+        data = {
+            "pid": pid
+        }
+        resp = self._s.post(self.validasi_bidang_url, data=data)
         return resp.json()
