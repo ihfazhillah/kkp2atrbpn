@@ -4,8 +4,7 @@ import pandas
 import requests
 from requests.sessions import Session
 
-from automate.kkp2 import KKP
-from automate.pages import DetilQueryPageObject, LoginPageObject, PilihKantorPageObject
+from kkpatrbpn.automate.kkp2 import KKP
 from environs import Env
 
 

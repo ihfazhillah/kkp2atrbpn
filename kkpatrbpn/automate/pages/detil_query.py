@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-from automate.pages.base import BasePageObject, set_response
+from kkpatrbpn.automate.pages.base import BasePageObject, set_response
 
 
 class DetilQueryPageObject(BasePageObject):

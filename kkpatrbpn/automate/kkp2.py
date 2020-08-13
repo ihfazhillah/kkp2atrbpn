@@ -1,6 +1,6 @@
 import requests
 
-from automate.pages import LoginPageObject, PilihKantorPageObject, DetilQueryPageObject
+from kkpatrbpn.automate.pages import LoginPageObject, PilihKantorPageObject, DetilQueryPageObject
 
 
 class KKP:
