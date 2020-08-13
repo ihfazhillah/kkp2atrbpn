@@ -8,6 +8,7 @@ class DetilQueryPageObject(BasePageObject):
     detil_query_url = "https://kkp2.atrbpn.go.id/peta/DataSpasial/DetilQuery"
     get_wilayah_url = "https://kkp2.atrbpn.go.id/peta/Wilayah/GetWilayah"
     url_query = "https://kkp2.atrbpn.go.id/peta/DataSpasial/QueryByNIB"
+    detil_info_url = "https://kkp2.atrbpn.go.id/peta/DataSpasial/DetilInfoFromPP"
 
     @set_response
     def init_page(self) -> requests.Response:
@@ -75,4 +76,12 @@ class DetilQueryPageObject(BasePageObject):
 
         # update the start
         self.start_result += self.num_result
+        return resp.json()
+
+    def get_detail_info(self, pid: str):
+        data = {
+            "featureId": f"PersilBerdasarkanStatusPendaftaran.{pid}",
+            "page": 1
+        }
+        resp = self._s.post(self.detil_info_url, data=data)
         return resp.json()
