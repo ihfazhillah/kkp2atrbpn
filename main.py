@@ -1,3 +1,5 @@
+import json
+
 import requests
 from requests.sessions import Session
 
@@ -11,21 +13,27 @@ def main():
     env.read_env()
 
     kkp = KKP(env("KKP_USERNAME"), env("KKP_PASSWORD"), env("KKP_KANTOR"))
-    # kkp.validasi_persil("tebo tengah", "semabu")
-    print("validasi")
-    url = "https://kkp2.atrbpn.go.id/peta/DataSpasial/ValidasiBidang"
-    data = {
-        "pid": "9FDCF2AA1CE996E3E0530C1D140AC479"
-    }
-    resp = kkp.session.post(url, data=data)
-    print(resp.content)
-    url = "https://kkp2.atrbpn.go.id/peta/DataSpasial/DetilInfoFromPP"
-    data = {
-        "featureId": "PersilBerdasarkanStatusPendaftaran.9FDCF2AA1CE996E3E0530C1D140AC479",
-        "page": 1
-    }
-    resp = kkp.session.post(url, data=data)
-    print(resp.text)
+    non_valid_list = kkp.validasi_persil("tebo tengah", "semabu")
+
+    with open("hasil.json", "w") as hasil:
+        json.dump(non_valid_list, hasil, indent=4)
+
+    print("wes bar...")
+
+    # print("validasi")
+    # url = "https://kkp2.atrbpn.go.id/peta/DataSpasial/ValidasiBidang"
+    # data = {
+    #     "pid": "9FDCF2AA1CE996E3E0530C1D140AC479"
+    # }
+    # resp = kkp.session.post(url, data=data)
+    # print(resp.content)
+    # url = "https://kkp2.atrbpn.go.id/peta/DataSpasial/DetilInfoFromPP"
+    # data = {
+    #     "featureId": "PersilBerdasarkanStatusPendaftaran.9FDCF2AA1CE996E3E0530C1D140AC479",
+    #     "page": 1
+    # }
+    # resp = kkp.session.post(url, data=data)
+    # print(resp.text)
     #
     # s: Session = requests.Session()
     #

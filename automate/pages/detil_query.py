@@ -85,7 +85,16 @@ class DetilQueryPageObject(BasePageObject):
             "page": 1
         }
         resp = self._s.post(self.detil_info_url, data=data)
-        return resp.json()
+
+        detail = {}
+        soup = self.make_soup(resp)
+        persil_items = soup.select(".persil-item")
+        for persil_item in persil_items:
+            items = persil_item.select("div")
+            judul = items[0].get_text().strip()
+            value = items[1].get_text().strip()
+            detail[judul] = value
+        return detail
 
     def validate_bidang(self, pid: str):
         data = {

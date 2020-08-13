@@ -40,17 +40,23 @@ class KKP:
         detail_query.set_kecamatan(kecamatan)
         detail_query.set_desa(desa)
 
+        count = 1
         while True:
+            print(f"prosess page {count}")
             start = detail_query.start_result
             length = detail_query.num_result
 
             resp = detail_query.cari(start, length)
 
-            print(*resp["data"], sep="\n")
+            for persil in resp["data"]:
+                non_valid = self._validate_individual_persil(persil, detail_query)
+                if non_valid:
+                    not_valid_list.append(non_valid)
 
             if start >= resp["recordsFiltered"]:
                 break
 
+            count += 1
 
         return not_valid_list
 
@@ -66,4 +72,6 @@ class KKP:
             message = resp["Message"]
 
             if not valid:
-                pass
+                detail_info = detail_query.get_detail_info(pid)
+                detail_info["message"] = message
+                return detail_info
