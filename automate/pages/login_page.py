@@ -1,4 +1,4 @@
-from automate.base import BasePageObject, set_response
+from automate.pages.base import BasePageObject, set_response
 
 
 class LoginPageObject(BasePageObject):

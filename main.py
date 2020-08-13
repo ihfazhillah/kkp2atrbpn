@@ -1,9 +1,7 @@
 import requests
 from requests.sessions import Session
 
-from automate.detil_query import DetilQueryPageObject
-from automate.login_page import LoginPageObject
-from automate.pilih_kantor import PilihKantorPageObject
+from automate.pages import DetilQueryPageObject, LoginPageObject, PilihKantorPageObject
 from environs import Env
 
 
