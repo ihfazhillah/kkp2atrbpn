@@ -1,5 +1,6 @@
 import json
 
+import pandas
 import requests
 from requests.sessions import Session
 
@@ -13,10 +14,13 @@ def main():
     env.read_env()
 
     kkp = KKP(env("KKP_USERNAME"), env("KKP_PASSWORD"), env("KKP_KANTOR"))
-    non_valid_list = kkp.validasi_persil("tebo tengah", "semabu")
+    non_valid_list = kkp.validasi_persil("tebo tengah", "kandang")
 
-    with open("hasil.json", "w") as hasil:
+    with open("hasil.kandang.json", "w") as hasil:
         json.dump(non_valid_list, hasil, indent=4)
+
+    df = pandas.read_json("hasil.kandang.json")
+    df.to_csv("hasil.csv")
 
     print("wes bar...")
 
