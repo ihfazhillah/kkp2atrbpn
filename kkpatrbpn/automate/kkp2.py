@@ -85,7 +85,7 @@ class KKP:
 
         def get_info(persil, **kwargs):
             detail = detail_query.get_detail_info(persil["PersilId"])
-            detail["Sudah Valid"] = persil["ValidasiGeom"] == "true"
+            detail["Sudah Valid"] = "Valid" if persil["ValidasiGeom"] == "true" else "Tidak Valid"
             detail["Keterangan"] = ""
             return detail
 
@@ -104,9 +104,9 @@ class KKP:
                 message = resp["Message"]
 
                 if valid:
-                    detail["Sudah Valid"] = True
+                    detail["Sudah Valid"] = "Valid"
                 else:
-                    detail["Sudah Valid"] = False
+                    detail["Sudah Valid"] = "Tidak Valid"
                     detail["Keterangan"] = message
             return detail
 
