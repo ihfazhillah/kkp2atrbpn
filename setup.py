@@ -5,12 +5,12 @@ with open("requirements.txt", "r") as reqs:
 
 setup(
     name='kkp2persil',
-    version='0.1',
+    version='0.2',
     packages=['kkpatrbpn.automate', 'kkpatrbpn.automate.pages'],
     url='https://github.com/ihfazhillah/kkp2atrbpn',
     license='',
     author='ihfazh',
     author_email='me@ihfazh.com',
     description='',
-    install_required=install_required
+    install_requires=install_required
 )
