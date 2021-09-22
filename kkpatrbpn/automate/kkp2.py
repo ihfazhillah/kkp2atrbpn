@@ -51,7 +51,7 @@ class KKP:
         pilih_kantor.pilih(self.kantor)
         pilih_kantor.submit()
 
-    def validasi_persil(self, kecamatan: str, desa: str) -> ValidationResult:
+    def validasi_persil(self, kecamatan: str, desa: str, nib: str = None) -> ValidationResult:
         print("validasi...")
         """
         Return not valid bidang, with its info and reason why its not valid
@@ -63,6 +63,9 @@ class KKP:
         detail_query = DetilQueryPageObject(self.session)
         detail_query.set_kecamatan(kecamatan)
         detail_query.set_desa(desa)
+
+        if nib:
+            detail_query.set_nib(nib)
 
         all_persil = []
 

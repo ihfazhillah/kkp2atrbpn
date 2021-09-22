@@ -52,6 +52,9 @@ class DetilQueryPageObject(BasePageObject):
         else:
             raise Exception(f"Desa {desa} tidak ditemukan.")
 
+    def set_nib(self, nib: str):
+        self._data["detil_query"]["NomorBidang"] = nib
+
     def _set_provinsi(self):
         option = self.soup.select_one("[name='inputwilayah.SelectedPropinsi'] option")
         self._data["detil_query"]["inputwilayah.SelectedPropinsi"] = option["value"]
