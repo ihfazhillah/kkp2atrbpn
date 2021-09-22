@@ -20,10 +20,17 @@ ValidationResult = namedtuple(
 )
 
 
+headers = {
+    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:92.0) Gecko/20100101 Firefox/92.0"
+}
+
+
 class KKP:
 
     def __init__(self, username: str, password: str, kantor: str, use_concurent=True):
+        
         self.session = requests.Session()
+        self.session.headers.update(headers)
 
         self.username = username
         self.password = password
