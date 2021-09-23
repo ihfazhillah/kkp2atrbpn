@@ -97,6 +97,7 @@ class KKP:
             detail = detail_query.get_detail_info(persil["PersilId"])
             detail["Sudah Valid"] = "Valid" if persil["ValidasiGeom"] == "true" else "Tidak Valid"
             detail["Keterangan"] = ""
+            detail["Nomor"] = persil["Nomor"]
             return detail
 
         def get_gambar_belum_ada(persil, detail):
