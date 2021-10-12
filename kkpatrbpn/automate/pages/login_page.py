@@ -25,7 +25,7 @@ class LoginPageObject(BasePageObject):
 
     @property
     def logged_in(self):
-        soup = self.make_soup(self.latest_response)
+        soup = self.make_soup(self.latest_response.resp)
         keluar = soup.select_one("a[title='Keluar']")
         if keluar:
             return True
