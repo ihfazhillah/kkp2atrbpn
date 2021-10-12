@@ -22,3 +22,11 @@ class LoginPageObject(BasePageObject):
         )
         resp = self._s.post(self.login_url, self._data["login"], params=params)
         return resp
+
+    @property
+    def logged_in(self):
+        soup = self.make_soup(self.latest_response)
+        keluar = soup.select_one("a[title='Keluar']")
+        if keluar:
+            return True
+        return False

@@ -47,6 +47,12 @@ class KKP:
         login_page.set_password(self.password)
         login_page.submit()
 
+        if login_page.logged_in:
+            """
+            12/10/2021 new flow. After login using username password, redirected into dashboard
+            """
+            return
+
         pilih_kantor = PilihKantorPageObject(self.session)
         pilih_kantor.pilih(self.kantor)
         pilih_kantor.submit()
