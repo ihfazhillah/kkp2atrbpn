@@ -13,13 +13,18 @@ def main():
     env.read_env()
 
     kkp = KKP(env("KKP_USERNAME"), env("KKP_PASSWORD"), env("KKP_KANTOR"))
-    non_valid_list = kkp.validasi_persil("tebo tengah", "semabu")
-
-    with open("hasil.semabu.json", "w") as hasil:
-        json.dump(non_valid_list.all_result, hasil, indent=4)
-
-    df = pandas.read_json("hasil.semabu.json")
-    df.to_csv("hasil.semabu.csv")
+    kkp.buka_validasi(
+        "A9E1A564BE7EE856E0400B0A9A145B09",
+        "A9E2A711B0F87D4AE0400B0A9A141123",
+        "2"
+    )
+    # non_valid_list = kkp.validasi_persil("tebo tengah", "semabu")
+    #
+    # with open("hasil.semabu.json", "w") as hasil:
+    #     json.dump(non_valid_list.all_result, hasil, indent=4)
+    #
+    # df = pandas.read_json("hasil.semabu.json")
+    # df.to_csv("hasil.semabu.csv")
 
     print("wes bar...")
 

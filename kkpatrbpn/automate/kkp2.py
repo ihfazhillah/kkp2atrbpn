@@ -7,7 +7,7 @@ import requests
 from requests.exceptions import ReadTimeout
 
 from kkpatrbpn.automate.pages import LoginPageObject, PilihKantorPageObject, DetilQueryPageObject
-
+from kkpatrbpn.automate.pages.dokumen_pengukuran_persil import DokumenPengukuranPersil
 
 ValidationResult = namedtuple(
     "ValidationResult",
@@ -56,6 +56,15 @@ class KKP:
         pilih_kantor = PilihKantorPageObject(self.session)
         pilih_kantor.pilih(self.kantor)
         pilih_kantor.submit()
+
+    def buka_validasi(self, kecamatan_id: str, desa_id: str, nib: str = None):
+        persil_page = DokumenPengukuranPersil(self.session)
+        persil_page.set_kecamatan_id(kecamatan_id)
+        persil_page.set_desa_id(desa_id)
+        if nib:
+            persil_page.set_nib(nib)
+
+        persil_page.buka_validasi()
 
     def validasi_persil(self, kecamatan: str, desa: str, nib: str = None) -> ValidationResult:
         print("validasi...")

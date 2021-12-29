@@ -6,7 +6,6 @@ from kkpatrbpn.automate.pages.base import BasePageObject, set_response
 
 class DetilQueryPageObject(BasePageObject):
     detil_query_url = "https://kkp2.atrbpn.go.id/peta/DataSpasial/DetilQuery"
-    get_wilayah_url = "https://kkp2.atrbpn.go.id/peta/Wilayah/GetWilayah"
     url_query = "https://kkp2.atrbpn.go.id/peta/DataSpasial/QueryByNIB"
     detil_info_url = "https://kkp2.atrbpn.go.id/peta/DataSpasial/DetilInfoFromPP"
     validasi_bidang_url = "https://kkp2.atrbpn.go.id/peta/DataSpasial/ValidasiBidang"
@@ -24,15 +23,6 @@ class DetilQueryPageObject(BasePageObject):
     def soup(self) -> BeautifulSoup:
         return self.make_soup(self.latest_response.resp)
 
-    def _get_wilayah(self, tipe: str, kode: str) -> list:
-        params = {
-            "tipe": tipe,
-            "kode": kode,
-            "inkantor": "True"
-        }
-        resp = self._s.get(self.get_wilayah_url, params=params)
-        return resp.json()
-
     def set_kecamatan(self, kecamatan: str):
         for option in self.soup.select("[name='inputwilayah.SelectedKecamatan'] option"):
             text = option.get_text().lower()
@@ -43,7 +33,7 @@ class DetilQueryPageObject(BasePageObject):
             raise Exception(f"Kecamatan {kecamatan} tidak ditemukan.")
 
     def set_desa(self, desa: str):
-        wilayah_list = self._get_wilayah("keca", self._data["detil_query"]["inputwilayah.SelectedKecamatan"])
+        wilayah_list = self.get_wilayah("keca", self._data["detil_query"]["inputwilayah.SelectedKecamatan"])
         for wilayah in wilayah_list:
             nama = wilayah["nama"].lower()
             if desa.lower() == nama:

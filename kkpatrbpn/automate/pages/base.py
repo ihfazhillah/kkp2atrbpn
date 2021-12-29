@@ -48,6 +48,9 @@ def set_response(function):
 
 
 class BasePageObject():
+
+    get_wilayah_url = "https://kkp2.atrbpn.go.id/peta/Wilayah/GetWilayah"
+
     def __init__(self, session: requests.Session):
         self._s = session
         self._s.headers.update(headers)
@@ -62,3 +65,12 @@ class BasePageObject():
     def make_soup(resp: requests.Response) -> BeautifulSoup:
         soup = BeautifulSoup(resp.content, "html.parser")
         return soup
+
+    def get_wilayah(self, tipe: str, kode: str) -> list:
+        params = {
+            "tipe": tipe,
+            "kode": kode,
+            "inkantor": "True"
+        }
+        resp = self._s.get(self.get_wilayah_url, params=params)
+        return resp.json()
