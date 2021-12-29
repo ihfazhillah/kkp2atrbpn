@@ -57,6 +57,10 @@ class KKP:
         pilih_kantor.pilih(self.kantor)
         pilih_kantor.submit()
 
+    def get_list_wilayah(self):
+        persil_page = DokumenPengukuranPersil(self.session)
+        return persil_page.get_list_wilayah()
+
     def buka_validasi(self, kecamatan_id: str, desa_id: str, nib: str = None):
         persil_page = DokumenPengukuranPersil(self.session)
         persil_page.set_kecamatan_id(kecamatan_id)

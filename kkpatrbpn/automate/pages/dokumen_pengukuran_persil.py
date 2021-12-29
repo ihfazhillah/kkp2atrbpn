@@ -49,6 +49,26 @@ class DokumenPengukuranPersil(BasePageObject):
         print(resp_data["Message"])
         raise LepasValidasiError(resp_data["Message"])
 
+    def _get_list_kecamatan(self):
+        selector = "#cari-persil_inputwilayah_SelectedKecamatan"
+        kecamatan_select = self.soup.select_one(selector)
+        return {
+            option["value"]: {"nama": option.get_text(), "desa": []}
+            for option in kecamatan_select.find_all("option")
+        }
+
+    def get_list_wilayah(self):
+        self._set_kabupaten()
+        kecamatan = self._get_list_kecamatan()
+        wilayah_list = self.get_wilayah("keca", self._data["persil_query"]["inputwilayah.SelectedKabupaten"])
+        for wilayah in wilayah_list:
+            induk = wilayah["induk"]
+            nama = wilayah["nama"]
+            wilayah_id = wilayah["wilayahid"]
+            kecamatan[induk]["desa"].append({"id": wilayah_id, "nama": nama})
+
+        return kecamatan
+
     def buka_validasi(self):
         self._set_provinsi()
         self._set_kabupaten()
