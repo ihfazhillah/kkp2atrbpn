@@ -80,8 +80,8 @@ class KKP:
         :return:
         """
         detail_query = DetilQueryPageObject(self.session)
-        detail_query.set_kecamatan(kecamatan)
-        detail_query.set_desa(desa)
+        detail_query.set_kecamatan_id(kecamatan)
+        detail_query.set_desa_id(desa)
 
         if nib:
             detail_query.set_nib(nib)

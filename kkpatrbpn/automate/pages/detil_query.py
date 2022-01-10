@@ -32,6 +32,12 @@ class DetilQueryPageObject(BasePageObject):
         else:
             raise Exception(f"Kecamatan {kecamatan} tidak ditemukan.")
 
+    def set_kecamatan_id(self, kecamatan_id: str):
+        self._data["detil_query"]["inputwilayah.SelectedKecamatan"] = kecamatan_id
+
+    def set_desa_id(self, desa_id: str):
+        self._data["detil_query"]["inputwilayah.SelectedDesa"] = desa_id
+
     def set_desa(self, desa: str):
         wilayah_list = self.get_wilayah("keca", self._data["detil_query"]["inputwilayah.SelectedKecamatan"])
         for wilayah in wilayah_list:
